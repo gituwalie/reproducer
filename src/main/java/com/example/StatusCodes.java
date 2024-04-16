@@ -1,4 +1,4 @@
-package exception;
+package com.example;
 
 public enum StatusCodes {
     RMIAC_4000("RMIAC-4000", "Generic error");

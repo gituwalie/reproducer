@@ -1,4 +1,4 @@
-package service;
+package com.example.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 

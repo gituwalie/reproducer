@@ -1,4 +1,4 @@
-package exception;
+package com.example;
 
 public enum ExceptionType {
     DATA,

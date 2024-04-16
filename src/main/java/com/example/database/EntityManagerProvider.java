@@ -1,11 +1,11 @@
-package database;
+package com.example.database;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 
-import static com.netcracker.rmi.ac.Consts.ENTITY_MANAGER_NAME;
+import static com.example.Consts.ENTITY_MANAGER_NAME;
 
 /*
  Simple wrap for entity manager to avoid copying same stuff for each service

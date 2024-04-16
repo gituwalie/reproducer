@@ -1,4 +1,4 @@
-package pojo;
+package com.example.pojo;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;

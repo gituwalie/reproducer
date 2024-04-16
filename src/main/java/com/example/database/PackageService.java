@@ -1,7 +1,6 @@
-package database;
+package com.example.database;
 
 
-import com.netcracker.rmi.ac.service.PolicySetConverter;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -12,22 +11,17 @@ import java.util.List;
 public class PackageService {
     @Inject
     EntityManagerProvider emp;
-    @Inject
-    PolicySetConverter converter;
+
 
     @Transactional
-    public Package create(Package pkg) {
-        pkg.getPolicySets().forEach(d -> {
-            String s = converter.supplyUUIDs(d.getData());
-            d.setData(s);
-        });
+    public com.example.pojo.Package create(com.example.pojo.Package pkg) {
         emp.getEntityManager().persist(pkg);
         return pkg;
     }
 
-    public Package read(Long id) {
+    public com.example.pojo.Package read(Long id) {
         if (exists(id)) {
-            return emp.getEntityManager().createQuery("FROM Package u WHERE u.id = :id", Package.class)
+            return emp.getEntityManager().createQuery("FROM Package u WHERE u.id = :id", com.example.pojo.Package.class)
                     .setParameter("id", id)
                     .getSingleResult();
         }
@@ -44,16 +38,16 @@ public class PackageService {
 
     @Transactional
     public void delete(String tenantId) {
-        Package p = emp.getEntityManager().createQuery("FROM Package WHERE tenantId = :tenant_id", Package.class).setParameter("tenant_id", tenantId).getSingleResult();
+        com.example.pojo.Package p = emp.getEntityManager().createQuery("FROM Package WHERE tenantId = :tenant_id", com.example.pojo.Package.class).setParameter("tenant_id", tenantId).getSingleResult();
         emp.getEntityManager().remove(p);
     }
 
-    public List<Package> read(String tenantId) {
-        return emp.getEntityManager().createQuery("FROM Package u WHERE u.tenantId = :tenant_id", Package.class).setParameter("tenant_id", tenantId).getResultList();
+    public List<com.example.pojo.Package> read(String tenantId) {
+        return emp.getEntityManager().createQuery("FROM Package u WHERE u.tenantId = :tenant_id", com.example.pojo.Package.class).setParameter("tenant_id", tenantId).getResultList();
     }
 
-    public List<Package> readALL() {
-        return emp.getEntityManager().createQuery("FROM Package u", Package.class).getResultList();
+    public List<com.example.pojo.Package> readALL() {
+        return emp.getEntityManager().createQuery("FROM Package u", com.example.pojo.Package.class).getResultList();
     }
 
     public boolean exists(String packageName, String version) {

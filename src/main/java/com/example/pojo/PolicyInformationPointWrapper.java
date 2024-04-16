@@ -1,4 +1,4 @@
-package pojo;
+package com.example.pojo;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonRawValue;
@@ -20,7 +20,7 @@ public class PolicyInformationPointWrapper {
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pkg_id", referencedColumnName = "id", nullable = true)
-    private java.lang.Package pkg;
+    private com.example.pojo.Package pkg;
     @JsonRawValue
     @Column(name = "json_data")
     @JdbcTypeCode(SqlTypes.JSON)
@@ -44,11 +44,11 @@ public class PolicyInformationPointWrapper {
         this.id = id;
     }
 
-    public java.lang.Package getPkg() {
+    public com.example.pojo.Package getPkg() {
         return pkg;
     }
 
-    public void setPkg(java.lang.Package pkg) {
+    public void setPkg(com.example.pojo.Package pkg) {
         this.pkg = pkg;
     }
 

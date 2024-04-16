@@ -1,8 +1,7 @@
-package endpoint;
+package com.example;
 
-import com.netcracker.rmi.ac.exception.ApplicationException;
-import com.netcracker.rmi.ac.exception.ExceptionType;
-import com.netcracker.rmi.ac.service.PackageProcessionService;
+
+import com.example.service.PackageProcessionService;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -40,7 +39,7 @@ public class ZipProcessionResource {
     @GET
     @Produces("application/json")
     public Response listPackages(@QueryParam("tenant_id") String tenant) {
-        List<Package> packages = packageProcessionService.listPackages(tenant);
+        List<com.example.pojo.Package> packages = packageProcessionService.listPackages(tenant);
         return Response.ok(packages).build();
     }
 
@@ -56,7 +55,7 @@ public class ZipProcessionResource {
     @Path("/{id}")
     @Produces("application/json")
     public Response getById(@PathParam("id") Long id) {
-        Package byId = packageProcessionService.getById(id);
+        com.example.pojo.Package  byId = packageProcessionService.getById(id);
         if (Objects.isNull(byId)){
             return Response.status(Response.Status.NOT_FOUND).build();
         }

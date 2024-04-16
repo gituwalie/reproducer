@@ -1,4 +1,4 @@
-package exception;
+package com.example;
 
 public class ApplicationException extends RuntimeException {
     public Throwable exception;

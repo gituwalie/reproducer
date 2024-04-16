@@ -1,11 +1,7 @@
-package database;
+package com.example.database;
 
 
-import com.netcracker.rmi.ac.pojo.PolicySetWrapper;
-import com.netcracker.rmi.ac.service.PolicySetConverter;
-import com.netcracker.security.authorization.abac.api.engine.model.policy.PolicySet;
-import com.netcracker.security.authorization.abac.api.rest.context.RestContext;
-import com.netcracker.security.authorization.abac.api.rest.pap.extension.repository.AbstractPolicySetRepository;
+import com.example.pojo.PolicySetWrapper;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.inject.Inject;
@@ -21,40 +17,14 @@ import java.util.stream.Collectors;
 @Singleton
 @Alternative
 @Priority(999)
-public class PolicySetService extends AbstractPolicySetRepository {
+public class PolicySetService  {
     @Inject
     EntityManagerProvider emp;
-    @Inject
-    PolicySetConverter converter;
 
-    @Override
-    public @NotNull Collection<PolicySet> findAll() {
-        return emp.getEntityManager().createQuery("FROM PolicySetWrapper", PolicySetWrapper.class)
-                .getResultList()
-                .stream()
-                .map(converter::decode)
-                .collect(Collectors.toSet());
-    }
-
-    @Override
     @Transactional
-    public void saveAll(RestContext ctx, @NotNull Collection<PolicySet> policySets) {
-        for (PolicySet pip : policySets) {
-            boolean exists = exists(pip.getId().toString(), pip.getTenantId());
-            if (!exists) {
-                PolicySetWrapper q = converter.encode(pip);
-                q.setTenantId(ctx.getTenant());
-                emp.getEntityManager().persist(q);
-            }
-        }
-        emp.getEntityManager().flush();
-    }
-
-    @Override
-    @Transactional
-    public void deleteByIdIn(RestContext ctx, @NotNull Collection<UUID> ids) {
+    public void deleteByIdIn(@NotNull Collection<UUID> ids) {
         List<PolicySetWrapper> resultList = emp.getEntityManager().createQuery("SELECT e from PolicySetWrapper e where e.tenantId = :tenant_id and e.id IN (:to_del)", PolicySetWrapper.class)
-                .setParameter("tenant_id", ctx.getTenant())
+                .setParameter("tenant_id", "q")
                 .setParameter("to_del", ids.stream().map(UUID::toString).collect(Collectors.toSet()))
                 .getResultList();
         resultList.forEach(d -> emp.getEntityManager().remove(d));

@@ -1,3 +1,5 @@
+package com.example;
+
 public class Consts {
     public static final String ENTITY_MANAGER_NAME = "ENTITY_MANAGER_NAME";
     public static final String ORACLE_DATASOURCE_NAME = "oracle";

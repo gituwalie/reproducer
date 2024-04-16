@@ -1,8 +1,9 @@
-package service;
+package com.example.service;
 
 
 import java.io.File;
 import java.util.List;
+import com.example.pojo.Package;
 
 public interface PackageProcessionService {
     void processPackage(File zip, String tenant);

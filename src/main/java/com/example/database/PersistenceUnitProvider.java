@@ -1,4 +1,4 @@
-package database;
+package com.example.database;
 
 import io.agroal.api.AgroalDataSource;
 import io.quarkus.agroal.DataSource;
@@ -10,9 +10,9 @@ import jakarta.inject.Named;
 import jakarta.ws.rs.Produces;
 import org.hibernate.Session;
 
-import static com.netcracker.rmi.ac.Consts.ENTITY_MANAGER_NAME;
-import static com.netcracker.rmi.ac.Consts.ORACLE_DATASOURCE_NAME;
-import static com.netcracker.rmi.ac.Consts.POSTGRESQL_DATASOURCE_NAME;
+import static com.example.Consts.ENTITY_MANAGER_NAME;
+import static com.example.Consts.ORACLE_DATASOURCE_NAME;
+import static com.example.Consts.POSTGRESQL_DATASOURCE_NAME;
 
 public class PersistenceUnitProvider {
     @Inject

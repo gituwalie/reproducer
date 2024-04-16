@@ -1,5 +1,5 @@
 
-package exception;
+package com.example;
 
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
